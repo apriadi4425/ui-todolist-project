@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "504362499989",
+    "project_id": "jadwal-kegiatan-f307f",
+    "storage_bucket": "jadwal-kegiatan-f307f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:504362499989:android:01a73abd5934f6524c809c",
+        "android_client_info": {
+          "package_name": "com.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "504362499989-90pi9okq5nijtpj4l5726tt4ss5pgeqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB71z7rD57ak9LeMfVOO6iegQ-6tgBQ0jI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "504362499989-90pi9okq5nijtpj4l5726tt4ss5pgeqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
