@@ -1,13 +1,15 @@
 import React from 'react'
 import {AuthProvider} from './provider/AuthProvider'
-import {View, Text} from 'react-native'
+import { NavigationContainer } from '@react-navigation/native';
+import MainStack from './stack/MainStack'
+
 
 const Main = () => {
     return(
         <AuthProvider>
-            <View>
-                <Text>Tes</Text>
-            </View>
+            <NavigationContainer>
+                <MainStack/>
+            </NavigationContainer>
         </AuthProvider>
     )
 }
