@@ -3,6 +3,7 @@ import {View, TouchableOpacity, Text} from 'react-native';
 import {Agenda, LocaleConfig} from 'react-native-calendars';
 import {Card} from 'react-native-paper';
 
+
 LocaleConfig.locales['id'] = {
   monthNames: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
   monthNamesShort: ['Jan.','Feb.','Mar','Apr','Mei','Jun','Jul.','Agu','Sep.','Okt.','Nov.','Des.'],
@@ -13,6 +14,7 @@ LocaleConfig.locales['id'] = {
 LocaleConfig.defaultLocale = 'id';
 
 const AgendaScreen = ({items}) => {
+
 
   const renderItem = (item) => {
     return (

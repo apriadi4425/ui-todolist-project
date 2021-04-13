@@ -1,42 +1,32 @@
-import React, {useState, useEffect} from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import React, {useEffect, useContext} from 'react'
+import { View, Text, TouchableWithoutFeedback } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import AgendaScreen from './Agenda'
-import axios from 'axios'
+import { AuthContext } from '../../provider/AuthProvider'
 
-const HomeScreen = () => {
-    const [items, setItems] = useState({});
-    const [Loading, setLoading] = useState(true)
-
-    const getJadwal = async () => {
-        await axios({
-          method : 'get',
-          url : 'http://192.168.133.113:8000/api/jadwal',
-          headers : {
-            Accept: 'application/json',
-          }
-        }).then(res => {
-          setItems(res.data.data)
-        }).catch(err => {
-          console.log(err)
-        })
-        setLoading(false)
-      };
-
+const HomeScreen = ({navigation}) => {
+    const {state, getJadwal} = useContext(AuthContext)
 
     useEffect(() => {
+        navigation.setOptions({
+          headerRight: () => (
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('Tambah')}>
+                <Icon name="plus" size={20} style={{marginTop : 5, marginRight : 20, color : '#fff'}} />
+            </TouchableWithoutFeedback>
+        )
+        })
         getJadwal()
-    },[])
+    }, [])
 
     return(
         <View style={{flex : 1, backgroundColor : '#fff'}}>
-            
             <View style={{marginTop : 10, marginHorizontal : 10}}>
                 <Text>Selamat Datang</Text>
                 <Text>di Sistem Informasi Agenda Kegiatan Pimpinan</Text>
                 <Text>Setda Kabupaten Sukamara</Text>
             </View>
             {
-                Loading ? <View><Text>Loading...</Text></View> : <AgendaScreen items={items}/>
+                state.LoadingAgenda ? <View><Text>Loading...</Text></View> : <AgendaScreen items={state.agenda}/>
             }
             
         </View>
