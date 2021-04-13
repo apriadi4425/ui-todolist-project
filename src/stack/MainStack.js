@@ -1,16 +1,15 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeStack from './HomeStack'
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const MainStack = () => {
     return(
-        <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeStack} />
-            <Tab.Screen name="Kalender" component={HomeStack} />
-            <Tab.Screen name="Pengguna" component={HomeStack} />
-        </Tab.Navigator>
+        <Drawer.Navigator>
+            <Drawer.Screen name="Home" component={HomeStack} />
+            <Drawer.Screen name="Login" component={HomeStack} />
+        </Drawer.Navigator>
     )
 }
 
