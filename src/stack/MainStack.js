@@ -8,6 +8,8 @@ const MainStack = () => {
     return(
         <Tab.Navigator>
             <Tab.Screen name="Home" component={HomeStack} />
+            <Tab.Screen name="Kalender" component={HomeStack} />
+            <Tab.Screen name="Pengguna" component={HomeStack} />
         </Tab.Navigator>
     )
 }

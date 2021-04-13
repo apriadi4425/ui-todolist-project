@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
-import {Agenda} from 'react-native-calendars';
+import {Agenda, LocaleConfig} from 'react-native-calendars';
 import {Card} from 'react-native-paper';
 
+LocaleConfig.locales['id'] = {
+  monthNames: ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],
+  monthNamesShort: ['Jan.','Feb.','Mar','Apr','Mei','Jun','Jul.','Agu','Sep.','Okt.','Nov.','Des.'],
+  dayNames: ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'],
+  dayNamesShort: ['Sen.','Sel.','Rab.','Kam.','Jum.','Sab.','Min.'],
+  today: 'Hari ini'
+};
+LocaleConfig.defaultLocale = 'id';
 
 const AgendaScreen = ({items}) => {
 
