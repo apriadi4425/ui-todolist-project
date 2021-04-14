@@ -13,12 +13,12 @@ LocaleConfig.locales['id'] = {
 };
 LocaleConfig.defaultLocale = 'id';
 
-const AgendaScreen = ({items}) => {
+const AgendaScreen = ({items, navigation}) => {
 
 
   const renderItem = (item) => {
     return (
-      <TouchableOpacity style={{marginRight: 10, marginTop: 17}}>
+      <TouchableOpacity onPress={() => navigation.navigate('Detil', {id : item.id})} style={{marginRight: 10, marginTop: 17}}>
         <Card>
           <Card.Content>
             <View
@@ -29,7 +29,7 @@ const AgendaScreen = ({items}) => {
               }}>
               <Text style={{textAlign : 'right', flex : 1, color : 'grey', fontSize : 12}}>{item.tanggal}</Text>
             </View>
-            <Text>{item.jam} - SELESAI</Text>
+            <Text>{item.jam.toUpperCase()}</Text>
             <Text>Bertempat di {item.tempat}</Text>
             <Text>Tentang:</Text>
             <Text>{item.uraian}</Text>

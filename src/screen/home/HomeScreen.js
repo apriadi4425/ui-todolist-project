@@ -23,10 +23,10 @@ const HomeScreen = ({navigation}) => {
             <View style={{marginTop : 10, marginHorizontal : 10}}>
                 <Text>Selamat Datang</Text>
                 <Text>di Sistem Informasi Agenda Kegiatan Pimpinan</Text>
-                <Text>Setda Kabupaten Sukamara</Text>
+                <Text>Setda Kabupaten Pulang Pisau</Text>
             </View>
             {
-                state.LoadingAgenda ? <View><Text>Loading...</Text></View> : <AgendaScreen items={state.agenda}/>
+                state.LoadingAgenda ? <View><Text>Loading...</Text></View> : <AgendaScreen items={state.agenda} navigation={navigation}/>
             }
             
         </View>

@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-const CustomHooks = () => {
-    const [date, setDate] = useState(new Date());
+const CustomHooks = (tgl = new Date()) => {
+    const [date, setDate] = useState(tgl);
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
 
@@ -24,7 +24,7 @@ const CustomHooks = () => {
         showMode('time');
       };
 
-      return [ date, mode, show, onChange, showDatepicker, showTimepicker ]
+      return [ date, mode, show, onChange, showDatepicker, showTimepicker, setDate]
 }
 
 export default CustomHooks
