@@ -8,7 +8,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 
 const TambahKegiatanScreen = ({navigation}) => {
-    const {getJadwal} = useContext(AuthContext)
+    const {getJadwal, BaseUrl} = useContext(AuthContext)
     const [ date, mode, show, onChange, showDatepicker, showTimepicker ] = CustomHooks()
     const [ time1, mode1, show1, onChange1, showDatepicker1, showTimepicker1 ] = CustomHooks()
     const [ time2, mode2, show2, onChange2, showDatepicker2, showTimepicker2 ] = CustomHooks()
@@ -21,10 +21,11 @@ const TambahKegiatanScreen = ({navigation}) => {
         setLoadingTombol(true)
         await axios({
             method : 'post',
-            url : 'http://192.168.142.113:8000/api/jadwal',
+            url : `${BaseUrl}/api/jadwal`,
             data : {
                 tanggal : moment(date).format('YYYY-MM-DD'),
-                jam : `${moment(time1).format('LT')} WITA - ${moment(time2).format('LT') === moment(time1).format('LT') ? 'Selesai' : moment(time2).format('LT')}`,
+                jam : `${time1}`,
+                jam_2 : `${time2}`,
                 tempat : Tempat,
                 uraian : Uraian,
                 keterangan: Keterangan
@@ -40,6 +41,7 @@ const TambahKegiatanScreen = ({navigation}) => {
         })
         setLoadingTombol(false)
     }
+
 
 
 

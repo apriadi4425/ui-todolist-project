@@ -4,19 +4,20 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import axios from 'axios'
 import moment from 'moment'
 import { AuthContext } from '../../provider/AuthProvider'
-
+import { useIsFocused } from "@react-navigation/native";
 
 const DetilKegiatanScreen = ({navigation, route}) => {
-    const {getJadwal} = useContext(AuthContext)
+    const {getJadwal, BaseUrl} = useContext(AuthContext)
     const {id} = route.params
     const [Loading, setLoading] = useState(true)
     const [LoadingHapus, setLoadingHapus] = useState(false)
     const [Data, setData] = useState({})
+    const isFocused = useIsFocused();
 
     const getData = async () => {
         await axios({
             method : 'get',
-            url : `http://192.168.142.113:8000/api/jadwal/${id}`,
+            url : `${BaseUrl}/api/jadwal/${id}`,
             headers : {
                 Accept : 'aplication/json'
             }
@@ -32,7 +33,7 @@ const DetilKegiatanScreen = ({navigation, route}) => {
         setLoadingHapus(true)
         await axios({
             method : 'delete',
-            url : `http://192.168.142.113:8000/api/jadwal/${id}`,
+            url : `${BaseUrl}/api/jadwal/${id}`,
             headers : {
                 Accept : 'aplication/json'
             }
@@ -54,7 +55,7 @@ const DetilKegiatanScreen = ({navigation, route}) => {
           )
           })
         getData()
-    }, [])
+    }, [isFocused])
 
     return(
         <View style={{flex : 1, backgroundColor : '#fff'}}>
@@ -75,7 +76,7 @@ const DetilKegiatanScreen = ({navigation, route}) => {
                         </View>
                         <View style={{marginBottom : 30}}>
                             <Text style={{color : '#0099cc', fontSize : 20, fontWeight : 'bold'}}>Waktu Kegiatan</Text>
-                            <Text style={{fontSize : 15, marginTop : 10}}>{Data.jam.toUpperCase()}</Text>
+                            <Text style={{fontSize : 15, marginTop : 10}}>{moment(new Date(Data.jam)).format('LT').toUpperCase()} WITA - {Data.jam === Data.jam_2 ? 'Selesai' : `${moment(new Date(Data.jam_2)).format('LT')} WITA`}</Text>
                         </View>
                         <View style={{marginBottom : 30}}>
                             <Text style={{color : '#0099cc', fontSize : 20, fontWeight : 'bold'}}>Tempat Kegiatan</Text>

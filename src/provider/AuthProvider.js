@@ -7,11 +7,12 @@ export const AuthContext = createContext()
 
 export const AuthProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer, initialState)
+    const BaseUrl = 'http://192.168.26.113:8000'
 
     const getJadwal = useCallback(async () => {
         await axios({
           method : 'get',
-          url : 'http://192.168.142.113:8000/api/jadwal',
+          url : `${BaseUrl}/api/jadwal`,
           headers : {
             Accept: 'application/json',
           }
@@ -24,7 +25,7 @@ export const AuthProvider = ({children}) => {
         dispatch({type : 'LOADING_FALSE'})
       }, []);
 
-    const AuthState = {state, dispatch, getJadwal}
+    const AuthState = {state, dispatch, getJadwal, BaseUrl}
 
     return(
         <AuthContext.Provider value={AuthState}>

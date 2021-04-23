@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {Agenda, LocaleConfig} from 'react-native-calendars';
@@ -29,7 +30,7 @@ const AgendaScreen = ({items, navigation}) => {
               }}>
               <Text style={{textAlign : 'right', flex : 1, color : 'grey', fontSize : 12}}>{item.tanggal}</Text>
             </View>
-            <Text>{item.jam.toUpperCase()}</Text>
+            <Text>{moment(new Date(item.jam)).format('LT').toUpperCase()} WITA - {item.jam === item.jam_2 ? 'Selesai' : `${moment(new Date(item.jam_2)).format('LT')} WITA`}</Text>
             <Text>Bertempat di {item.tempat}</Text>
             <Text>Tentang:</Text>
             <Text>{item.uraian}</Text>

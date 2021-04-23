@@ -8,11 +8,11 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 
 const EditKegiatanScreen = ({navigation, route}) => {
-    const {getJadwal} = useContext(AuthContext)
+    const {getJadwal, BaseUrl} = useContext(AuthContext)
     const { data } = route.params
-    const [ date, mode, show, onChange, showDatepicker, showTimepicker ] = CustomHooks(data.tanggal)
-    const [ time1, mode1, show1, onChange1, showDatepicker1, showTimepicker1 ] = CustomHooks()
-    const [ time2, mode2, show2, onChange2, showDatepicker2, showTimepicker2 ] = CustomHooks()
+    const [ date, mode, show, onChange, showDatepicker, showTimepicker ] = CustomHooks(new Date(data.tanggal))
+    const [ time1, mode1, show1, onChange1, showDatepicker1, showTimepicker1 ] = CustomHooks(new Date(data.jam))
+    const [ time2, mode2, show2, onChange2, showDatepicker2, showTimepicker2 ] = CustomHooks(new Date(data.jam_2))
     const [Tempat, setTempat] = useState(data.tempat)
     const [Uraian, setUraian] = useState(data.uraian)
     const [Keterangan, setKeterangan] = useState(data.keterangan)
@@ -23,10 +23,11 @@ const EditKegiatanScreen = ({navigation, route}) => {
         setLoadingTombol(true)
         await axios({
             method : 'put',
-            url : 'http://192.168.142.113:8000/api/jadwal',
+            url : `${BaseUrl}/api/jadwal/${data.id}`,
             data : {
                 tanggal : moment(date).format('YYYY-MM-DD'),
-                jam : `${moment(time1).format('LT')} WITA - ${moment(time2).format('LT') === moment(time1).format('LT') ? 'Selesai' : moment(time2).format('LT')}`,
+                jam : time1,
+                jam_2 : time2,
                 tempat : Tempat,
                 uraian : Uraian,
                 keterangan: Keterangan
@@ -42,7 +43,6 @@ const EditKegiatanScreen = ({navigation, route}) => {
         })
         setLoadingTombol(false)
     }
-
 
 
     return(
@@ -92,7 +92,7 @@ const EditKegiatanScreen = ({navigation, route}) => {
                     </View>
                 </View>
 
-                <Button disabled={LoadingTombol} title={LoadingTombol ? 'Loading' : 'Tambah Agenda'} onPress={KirimEdit}/>
+                <Button disabled={LoadingTombol} title={LoadingTombol ? 'Loading' : 'Ubah Agenda Kegiatan'} onPress={KirimEdit}/>
             </View>
             {show && (
                 <DateTimePicker
