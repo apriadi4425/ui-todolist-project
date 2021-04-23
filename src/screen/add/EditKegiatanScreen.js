@@ -61,12 +61,12 @@ const EditKegiatanScreen = ({navigation, route}) => {
                     <View style={{flexDirection : 'row'}}>
                         <TouchableWithoutFeedback onPress={showTimepicker1}>
                             <View style={{flex : 1, borderBottomWidth : 1, borderBottomColor : 'grey', marginRight : 40}}>
-                                <Text style={{marginBottom : 10}}>Mulai : {moment(time1).format('LT')}</Text>
+                                <Text style={{marginBottom : 10}}>Mulai : {moment(new Date(time1)).format('LT')}</Text>
                             </View>
                         </TouchableWithoutFeedback>
                         <TouchableWithoutFeedback onPress={showTimepicker2}>
                             <View style={{flex : 1, borderBottomWidth : 1, borderBottomColor : 'grey'}}>
-                                <Text style={{marginBottom : 10}}>Hingga : {moment(time2).format('LT') === moment(time1).format('LT') ? 'Selesai' : moment(time2).format('LT')}</Text>
+                                <Text style={{marginBottom : 10}}>Hingga : {time2 === time1 ? 'Selesai' : moment(new Date(time2)).format('LT')}</Text>
                             </View>
                         </TouchableWithoutFeedback>
                         
