@@ -35,11 +35,12 @@ const DetilKegiatanScreen = ({navigation, route}) => {
             method : 'delete',
             url : `${BaseUrl}/api/jadwal/${id}`,
             headers : {
-                Accept : 'aplication/json'
+                Accept : 'aplication/json',
+                Authorization : `Bearer ${state.Token}`
             }
         }).then(async res => {
             await getJadwal()
-            navigation.goBack()
+            navigation.navigate('Home')
         }).catch(err => {
             console.log(err)
         })

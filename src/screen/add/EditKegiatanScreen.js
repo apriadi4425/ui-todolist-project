@@ -8,7 +8,7 @@ import { AuthContext } from '../../provider/AuthProvider';
 
 
 const EditKegiatanScreen = ({navigation, route}) => {
-    const {getJadwal, BaseUrl} = useContext(AuthContext)
+    const {state, getJadwal, BaseUrl} = useContext(AuthContext)
     const { data } = route.params
     const [ date, mode, show, onChange, showDatepicker, showTimepicker ] = CustomHooks(new Date(data.tanggal))
     const [ time1, mode1, show1, onChange1, showDatepicker1, showTimepicker1 ] = CustomHooks(new Date(data.jam))
@@ -33,7 +33,8 @@ const EditKegiatanScreen = ({navigation, route}) => {
                 keterangan: Keterangan
             },
             headers : {
-                Accept : 'aplication/json'
+                Accept : 'aplication/json',
+                Authorization : `Bearer ${state.Token}`
             }
         }).then(async res => {
             await getJadwal()
