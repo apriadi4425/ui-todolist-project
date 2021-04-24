@@ -10,13 +10,14 @@ const HomeScreen = ({navigation}) => {
     useEffect(() => {
         navigation.setOptions({
           headerRight: () => (
+            state.Login ?
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Tambah')}>
                 <Icon name="plus" size={20} style={{marginTop : 5, marginRight : 20, color : '#fff'}} />
-            </TouchableWithoutFeedback>
+            </TouchableWithoutFeedback> : null
         )
         })
         getJadwal()
-    }, [])
+    }, [state.Login])
 
     return(
         <View style={{flex : 1, backgroundColor : '#fff'}}>

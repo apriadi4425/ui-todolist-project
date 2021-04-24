@@ -7,7 +7,7 @@ import { AuthContext } from '../../provider/AuthProvider'
 import { useIsFocused } from "@react-navigation/native";
 
 const DetilKegiatanScreen = ({navigation, route}) => {
-    const {getJadwal, BaseUrl} = useContext(AuthContext)
+    const {state, getJadwal, BaseUrl} = useContext(AuthContext)
     const {id} = route.params
     const [Loading, setLoading] = useState(true)
     const [LoadingHapus, setLoadingHapus] = useState(false)
@@ -49,13 +49,14 @@ const DetilKegiatanScreen = ({navigation, route}) => {
     useEffect(() => {
         navigation.setOptions({
             headerRight: () => (
+              state.Login ?
               <TouchableWithoutFeedback disabled={LoadingHapus} onPress={deleteData}>
                   <Icon name="trash" size={20} style={{marginTop : 5, marginRight : 20, color : LoadingHapus ? 'red' : '#fff'}} />
-              </TouchableWithoutFeedback>
+              </TouchableWithoutFeedback> : null
           )
           })
         getData()
-    }, [isFocused])
+    }, [isFocused, state.Login])
 
     return(
         <View style={{flex : 1, backgroundColor : '#fff'}}>
@@ -66,11 +67,15 @@ const DetilKegiatanScreen = ({navigation, route}) => {
                         <View style={{marginBottom : 30}}>
                             <View style={{flexDirection : 'row'}}>
                                 <Text style={{color : '#0099cc', fontSize : 20, fontWeight : 'bold'}}>Tanggal Kegiatan</Text>
-                                <TouchableWithoutFeedback onPress={() => navigation.navigate('Edit', {data : Data})}>
-                                    <View style={{flex : 1, alignItems : 'flex-end'}}>
-                                        <Text style={{fontSize : 20, fontWeight : 'bold', color : 'green'}}>Ubah</Text>
-                                    </View>
-                                </TouchableWithoutFeedback>
+                                {
+                                    state.Login ? 
+                                    <TouchableWithoutFeedback onPress={() => navigation.navigate('Edit', {data : Data})}>
+                                        <View style={{flex : 1, alignItems : 'flex-end'}}>
+                                            <Text style={{fontSize : 20, fontWeight : 'bold', color : 'green'}}>Ubah</Text>
+                                        </View>
+                                    </TouchableWithoutFeedback> : null
+                                }
+                                
                             </View>
                             <Text style={{fontSize : 15, marginTop : 10}}>{moment(Data.tanggal).format('dddd, DD MMMM YYYY')}</Text>
                         </View>
